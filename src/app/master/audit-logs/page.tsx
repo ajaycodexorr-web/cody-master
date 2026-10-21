@@ -179,7 +179,7 @@ export default function AuditLogsPage() {
               style={{
                 position: 'sticky',
                 top: 0,
-                backgroundColor: '#111916',
+                backgroundColor: 'var(--bg-elevated)',
                 borderBottom: '1px solid var(--border-strong)',
                 color: 'var(--text-muted)',
                 zIndex: 10
@@ -245,7 +245,7 @@ export default function AuditLogsPage() {
                               padding: '2px 8px',
                               borderRadius: 'var(--radius-pill)',
                               backgroundColor: 'var(--primary-soft)',
-                              color: 'var(--primary)',
+                              color: 'var(--primary-text)',
                               fontSize: '11px',
                               fontWeight: 600
                             }}
@@ -268,7 +268,7 @@ export default function AuditLogsPage() {
 
                       {/* Expandable JSON Payload Viewer */}
                       {isExpanded && (
-                        <tr style={{ backgroundColor: '#0c120f', borderBottom: '1px solid var(--border)' }}>
+                        <tr style={{ backgroundColor: 'var(--bg-elevated)', borderBottom: '1px solid var(--border)' }}>
                           <td colSpan={7} style={{ padding: '16px 24px' }}>
                             <div
                               style={{
@@ -278,7 +278,7 @@ export default function AuditLogsPage() {
                                 marginBottom: '10px'
                               }}
                             >
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary)', fontSize: '12px', fontWeight: 600 }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary-text)', fontSize: '12px', fontWeight: 600 }}>
                                 <Terminal size={14} />
                                 <span>Raw Event Payload Snapshot (JSON)</span>
                               </div>

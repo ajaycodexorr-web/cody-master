@@ -114,7 +114,7 @@ export default function SettingsPage() {
                   borderRadius: 'var(--radius-md)',
                   background: isActive ? 'var(--primary-soft)' : 'transparent',
                   border: 'none',
-                  color: isActive ? 'var(--primary)' : 'var(--text-secondary)',
+                  color: isActive ? 'var(--primary-text)' : 'var(--text-secondary)',
                   fontWeight: isActive ? 600 : 500,
                   fontSize: '13px',
                   cursor: 'pointer',
@@ -180,7 +180,7 @@ export default function SettingsPage() {
                   <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)' }}>
                     Super Administrator
                   </div>
-                  <div style={{ fontSize: '12px', color: 'var(--primary)', fontWeight: 500 }}>
+                  <div style={{ fontSize: '12px', color: 'var(--primary-text)', fontWeight: 600 }}>
                     Master Authority Tier • All Permissions Enabled
                   </div>
                 </div>

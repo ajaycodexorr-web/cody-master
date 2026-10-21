@@ -348,11 +348,11 @@ export default function OrganizationsPage() {
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Mail size={13} color="var(--primary)" />
+                  <Mail size={13} color="var(--primary-text)" />
                   <span>{org.adminEmail}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Phone size={13} color="var(--primary)" />
+                  <Phone size={13} color="var(--primary-text)" />
                   <span>{org.phone}</span>
                 </div>
               </div>
@@ -372,8 +372,8 @@ export default function OrganizationsPage() {
                         borderRadius: 'var(--radius-pill)',
                         backgroundColor: 'var(--primary-soft)',
                         border: '1px solid var(--primary-border)',
-                        color: 'var(--primary)',
-                        fontWeight: 500
+                        color: 'var(--primary-text)',
+                        fontWeight: 600
                       }}
                     >
                       {m}

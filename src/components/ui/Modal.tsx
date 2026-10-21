@@ -55,7 +55,7 @@ export const Modal: React.FC<ModalProps> = ({
             style={{
               position: 'fixed',
               inset: 0,
-              backgroundColor: 'rgba(5, 8, 7, 0.75)',
+              backgroundColor: 'rgba(16, 28, 22, 0.4)',
               backdropFilter: 'blur(8px)',
               WebkitBackdropFilter: 'blur(8px)'
             }}
@@ -71,7 +71,7 @@ export const Modal: React.FC<ModalProps> = ({
               position: 'relative',
               width: '100%',
               maxWidth,
-              backgroundColor: '#111916',
+              backgroundColor: 'var(--bg-surface)',
               border: '1px solid var(--border-strong)',
               borderRadius: 'var(--radius-xl)',
               boxShadow: 'var(--shadow-modal)',

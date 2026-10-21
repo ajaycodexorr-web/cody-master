@@ -152,7 +152,7 @@ export const CredentialsModal: React.FC<CredentialsModalProps> = ({
                 border: '1px solid var(--primary-border)'
               }}
             >
-              <span style={{ fontSize: '14px', color: 'var(--primary)', fontFamily: 'monospace', fontWeight: 600 }}>
+              <span style={{ fontSize: '14px', color: 'var(--primary-text)', fontFamily: 'monospace', fontWeight: 700 }}>
                 {tempPassword}
               </span>
               <button

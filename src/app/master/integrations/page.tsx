@@ -223,7 +223,7 @@ export default function IntegrationsPage() {
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
                 <thead
                   style={{
-                    backgroundColor: '#111916',
+                    backgroundColor: 'var(--bg-elevated)',
                     borderBottom: '1px solid var(--border)',
                     color: 'var(--text-muted)'
                   }}
@@ -337,7 +337,7 @@ export default function IntegrationsPage() {
                   style={{
                     position: 'sticky',
                     top: 0,
-                    backgroundColor: '#111916',
+                    backgroundColor: 'var(--bg-elevated)',
                     borderBottom: '1px solid var(--border-strong)',
                     color: 'var(--text-muted)',
                     zIndex: 10
@@ -381,7 +381,7 @@ export default function IntegrationsPage() {
                         </div>
                       </td>
 
-                      <td style={{ padding: '12px 20px', fontFamily: 'monospace', fontSize: '12px', color: 'var(--primary)' }}>
+                      <td style={{ padding: '12px 20px', fontFamily: 'monospace', fontSize: '12px', color: 'var(--primary-text)' }}>
                         {evt.eventType}
                       </td>
 
@@ -465,7 +465,7 @@ export default function IntegrationsPage() {
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
                 <thead
                   style={{
-                    backgroundColor: '#111916',
+                    backgroundColor: 'var(--bg-elevated)',
                     borderBottom: '1px solid var(--border)',
                     color: 'var(--text-muted)'
                   }}

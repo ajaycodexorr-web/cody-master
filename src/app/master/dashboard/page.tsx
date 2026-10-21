@@ -231,7 +231,7 @@ export default function DashboardPage() {
                     cx={pt.x}
                     cy={pt.y}
                     r={hoveredPoint?.month === pt.month ? 6 : 4}
-                    fill={hoveredPoint?.month === pt.month ? '#71ebb8' : '#111916'}
+                    fill={hoveredPoint?.month === pt.month ? '#71ebb8' : 'var(--bg-surface)'}
                     stroke="#71ebb8"
                     strokeWidth="2.5"
                     style={{ cursor: 'pointer', transition: 'all 0.2s ease' }}
@@ -259,17 +259,17 @@ export default function DashboardPage() {
                   position: 'absolute',
                   top: '10px',
                   right: '20px',
-                  backgroundColor: '#18231e',
-                  border: '1px solid var(--primary-border)',
+                  backgroundColor: 'var(--bg-surface)',
+                  border: '1px solid var(--border-strong)',
                   padding: '6px 12px',
                   borderRadius: 'var(--radius-md)',
-                  boxShadow: 'var(--shadow-glow)',
+                  boxShadow: 'var(--shadow-card)',
                   fontSize: '12px',
                   color: 'var(--text-primary)'
                 }}
               >
                 <span style={{ color: 'var(--text-secondary)' }}>{hoveredPoint.month}: </span>
-                <strong style={{ color: 'var(--primary)' }}>{hoveredPoint.count} Organizations</strong>
+                <strong style={{ color: 'var(--primary-text)' }}>{hoveredPoint.count} Organizations</strong>
               </div>
             )}
           </div>
@@ -337,7 +337,7 @@ export default function DashboardPage() {
                   justifyContent: 'center'
                 }}
               >
-                <span style={{ fontSize: '18px', fontWeight: 800, color: 'var(--primary)' }}>92%</span>
+                <span style={{ fontSize: '18px', fontWeight: 800, color: 'var(--primary-text)' }}>92%</span>
                 <span style={{ fontSize: '9px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                   Pipeline
                 </span>

@@ -98,7 +98,7 @@ export default function LoginPage() {
           padding: '60px 48px',
           position: 'relative',
           borderRight: '1px solid var(--border)',
-          backgroundColor: 'rgba(17, 25, 22, 0.4)',
+          backgroundColor: 'rgba(255, 255, 255, 0.65)',
           backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(10px)',
           zIndex: 2
@@ -125,8 +125,8 @@ export default function LoginPage() {
               C
             </div>
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: '28px', letterSpacing: '-0.02em' }}>
-              <span style={{ fontWeight: 800, color: 'var(--primary)' }}>Cody</span>
-              <span style={{ fontWeight: 300, color: 'var(--primary)', opacity: 0.9, marginLeft: '4px' }}>
+              <span style={{ fontWeight: 800, color: 'var(--primary-text)' }}>Cody</span>
+              <span style={{ fontWeight: 300, color: 'var(--primary-text)', opacity: 0.9, marginLeft: '4px' }}>
                 Master
               </span>
             </div>
@@ -141,7 +141,7 @@ export default function LoginPage() {
               borderRadius: 'var(--radius-pill)',
               backgroundColor: 'var(--primary-soft)',
               border: '1px solid var(--primary-border)',
-              color: 'var(--primary)',
+              color: 'var(--primary-text)',
               fontSize: '11px',
               fontWeight: 600,
               marginBottom: '20px'
@@ -320,13 +320,13 @@ export default function LoginPage() {
           style={{
             width: '100%',
             maxWidth: '460px',
-            backgroundColor: 'rgba(17, 25, 22, 0.75)',
+            backgroundColor: 'rgba(255, 255, 255, 0.92)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
             border: '1px solid var(--border-strong)',
             borderRadius: 'var(--radius-xl)',
             padding: '36px',
-            boxShadow: 'var(--shadow-card)'
+            boxShadow: 'var(--shadow-modal)'
           }}
         >
           <div style={{ marginBottom: '28px' }}>

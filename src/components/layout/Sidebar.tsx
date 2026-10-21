@@ -44,7 +44,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse 
         height: '100vh',
         position: 'sticky',
         top: 0,
-        backgroundColor: '#111916',
+        backgroundColor: 'var(--bg-surface)',
         borderRight: '1px solid var(--border)',
         display: 'flex',
         flexDirection: 'column',
@@ -88,8 +88,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse 
                 C
               </div>
               <div style={{ fontFamily: 'var(--font-heading)', fontSize: '20px', letterSpacing: '-0.02em' }}>
-                <span style={{ fontWeight: 800, color: 'var(--primary)' }}>Cody</span>
-                <span style={{ fontWeight: 300, color: 'var(--primary)', opacity: 0.9, marginLeft: '3px' }}>Master</span>
+                <span style={{ fontWeight: 800, color: 'var(--primary-text)' }}>Cody</span>
+                <span style={{ fontWeight: 300, color: 'var(--primary-text)', opacity: 0.9, marginLeft: '3px' }}>Master</span>
               </div>
             </Link>
           )}
@@ -191,7 +191,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse 
                     borderRadius: isCollapsed ? 'var(--radius-md)' : '0 var(--radius-md) var(--radius-md) 0',
                     borderLeft: !isCollapsed && isActive ? '4px solid var(--primary)' : '4px solid transparent',
                     backgroundColor: isActive ? 'var(--primary-soft)' : 'transparent',
-                    color: isActive ? 'var(--primary)' : 'var(--text-secondary)',
+                    color: isActive ? 'var(--primary-text)' : 'var(--text-secondary)',
                     fontWeight: isActive ? 600 : 500,
                     fontSize: '13px',
                     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -246,7 +246,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse 
               borderRadius: 'var(--radius-pill)',
               backgroundColor: 'var(--primary-soft)',
               border: '1px solid var(--primary-border)',
-              color: 'var(--primary)',
+              color: 'var(--primary-text)',
               fontWeight: 700,
               fontSize: '13px',
               display: 'flex',
@@ -278,7 +278,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse 
                   alignItems: 'center',
                   gap: '4px',
                   fontSize: '10px',
-                  color: 'var(--primary)',
+                  color: 'var(--primary-text)',
                   fontWeight: 600,
                   marginTop: '1px'
                 }}

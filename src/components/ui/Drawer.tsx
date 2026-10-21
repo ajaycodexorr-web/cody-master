@@ -45,7 +45,7 @@ export const Drawer: React.FC<DrawerProps> = ({
             style={{
               position: 'fixed',
               inset: 0,
-              backgroundColor: 'rgba(5, 8, 7, 0.75)',
+              backgroundColor: 'rgba(16, 28, 22, 0.4)',
               backdropFilter: 'blur(6px)',
               WebkitBackdropFilter: 'blur(6px)'
             }}
@@ -64,7 +64,7 @@ export const Drawer: React.FC<DrawerProps> = ({
               bottom: 0,
               width: '100%',
               maxWidth: width,
-              backgroundColor: '#111916',
+              backgroundColor: 'var(--bg-surface)',
               borderLeft: '1px solid var(--border-strong)',
               boxShadow: 'var(--shadow-modal)',
               zIndex: 10000,

@@ -205,7 +205,7 @@ export const CreateOrgModal: React.FC<CreateOrgModalProps> = ({ isOpen, onClose 
         style={{
           position: 'fixed',
           inset: 0,
-          backgroundColor: 'rgba(5, 8, 7, 0.8)',
+          backgroundColor: 'rgba(16, 28, 22, 0.4)',
           backdropFilter: 'blur(8px)'
         }}
       />
@@ -221,7 +221,7 @@ export const CreateOrgModal: React.FC<CreateOrgModalProps> = ({ isOpen, onClose 
           width: '100%',
           maxWidth: '680px',
           maxHeight: '90vh',
-          backgroundColor: '#111916',
+          backgroundColor: 'var(--bg-surface)',
           border: '1px solid var(--border-strong)',
           borderRadius: 'var(--radius-xl)',
           boxShadow: 'var(--shadow-modal)',

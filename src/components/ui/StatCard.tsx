@@ -69,9 +69,9 @@ export const StatCard: React.FC<StatCardProps> = ({
             width: '40px',
             height: '40px',
             borderRadius: 'var(--radius-md)',
-            backgroundColor: `${accentColor}18`,
-            border: `1px solid ${accentColor}33`,
-            color: accentColor,
+            backgroundColor: accentColor === '#71ebb8' ? 'var(--primary-soft)' : `${accentColor}18`,
+            border: `1px solid ${accentColor === '#71ebb8' ? 'var(--primary-border)' : `${accentColor}33`}`,
+            color: accentColor === '#71ebb8' ? 'var(--primary-text)' : accentColor,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'

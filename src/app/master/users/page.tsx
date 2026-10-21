@@ -163,7 +163,7 @@ export default function UsersPage() {
               style={{
                 position: 'sticky',
                 top: 0,
-                backgroundColor: '#111916',
+                backgroundColor: 'var(--bg-elevated)',
                 borderBottom: '1px solid var(--border-strong)',
                 color: 'var(--text-muted)',
                 zIndex: 10
@@ -301,7 +301,7 @@ export default function UsersPage() {
                               right: '20px',
                               top: '40px',
                               width: '180px',
-                              backgroundColor: '#18231e',
+                              backgroundColor: 'var(--bg-surface)',
                               border: '1px solid var(--border-strong)',
                               borderRadius: 'var(--radius-md)',
                               boxShadow: 'var(--shadow-modal)',

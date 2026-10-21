@@ -131,7 +131,7 @@ export const TopBar: React.FC = () => {
       <header
         style={{
           height: '70px',
-          backgroundColor: '#0d1411',
+          backgroundColor: 'var(--bg-surface)',
           borderBottom: '1px solid var(--border)',
           display: 'flex',
           alignItems: 'center',
@@ -214,7 +214,7 @@ export const TopBar: React.FC = () => {
               border: '1px solid var(--border)'
             }}
           >
-            <Calendar size={13} color="var(--primary)" />
+            <Calendar size={13} color="var(--primary-text)" />
             <span>{currentTime || 'Loading...'}</span>
           </div>
 
@@ -286,7 +286,7 @@ export const TopBar: React.FC = () => {
                     top: '48px',
                     right: 0,
                     width: '320px',
-                    backgroundColor: '#111916',
+                    backgroundColor: 'var(--bg-surface)',
                     border: '1px solid var(--border-strong)',
                     borderRadius: 'var(--radius-lg)',
                     boxShadow: 'var(--shadow-modal)',
@@ -368,7 +368,7 @@ export const TopBar: React.FC = () => {
                 borderRadius: 'var(--radius-pill)',
                 backgroundColor: 'var(--primary-soft)',
                 border: '1px solid var(--primary-border)',
-                color: 'var(--primary)',
+                color: 'var(--primary-text)',
                 fontWeight: 700,
                 fontSize: '13px',
                 display: 'flex',
@@ -393,7 +393,7 @@ export const TopBar: React.FC = () => {
                     top: '48px',
                     right: 0,
                     width: '220px',
-                    backgroundColor: '#111916',
+                    backgroundColor: 'var(--bg-surface)',
                     border: '1px solid var(--border-strong)',
                     borderRadius: 'var(--radius-lg)',
                     boxShadow: 'var(--shadow-modal)',
@@ -494,7 +494,7 @@ export const TopBar: React.FC = () => {
               style={{
                 position: 'fixed',
                 inset: 0,
-                backgroundColor: 'rgba(5, 8, 7, 0.8)',
+                backgroundColor: 'rgba(16, 28, 22, 0.4)',
                 backdropFilter: 'blur(8px)'
               }}
             />
@@ -508,7 +508,7 @@ export const TopBar: React.FC = () => {
                 position: 'relative',
                 width: '100%',
                 maxWidth: '560px',
-                backgroundColor: '#111916',
+                backgroundColor: 'var(--bg-surface)',
                 border: '1px solid var(--border-strong)',
                 borderRadius: 'var(--radius-xl)',
                 boxShadow: 'var(--shadow-modal)',
@@ -526,7 +526,7 @@ export const TopBar: React.FC = () => {
                   borderBottom: '1px solid var(--border)'
                 }}
               >
-                <Search size={18} color="var(--primary)" />
+                <Search size={18} color="var(--primary-text)" />
                 <input
                   type="text"
                   autoFocus
