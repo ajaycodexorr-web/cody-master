@@ -538,15 +538,6 @@ export default function OrganizationsPage() {
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => setModuleDrawerOrg(org)}
-                            icon={<Layers size={12} />}
-                          >
-                            Modules
-                          </Button>
-
-                          <Button
-                            variant="outline"
-                            size="sm"
                             onClick={() => setCredentialsOrg(org)}
                             icon={<Key size={12} />}
                           >
@@ -733,14 +724,6 @@ export default function OrganizationsPage() {
                 }}
               >
                 <div style={{ display: 'flex', gap: '8px' }}>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setModuleDrawerOrg(org)}
-                    icon={<Layers size={13} />}
-                  >
-                    Modules
-                  </Button>
                   <Button
                     variant="outline"
                     size="sm"
