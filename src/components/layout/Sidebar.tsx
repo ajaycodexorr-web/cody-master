@@ -13,7 +13,6 @@ import {
   Settings,
   ChevronLeft,
   ChevronRight,
-  LogOut,
   ShieldCheck
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
@@ -34,7 +33,7 @@ const NAV_ITEMS = [
 
 export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse }) => {
   const pathname = usePathname();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   return (
     <motion.aside
@@ -288,51 +287,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggleCollapse 
               </div>
             </div>
           )}
-
-          {!isCollapsed && (
-            <button
-              onClick={logout}
-              title="Sign Out"
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--text-muted)',
-                cursor: 'pointer',
-                padding: '6px',
-                borderRadius: 'var(--radius-sm)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'color 0.15s ease'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--danger)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-            >
-              <LogOut size={16} />
-            </button>
-          )}
         </div>
-
-        {isCollapsed && (
-          <button
-            onClick={logout}
-            title="Sign Out"
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--text-muted)',
-              cursor: 'pointer',
-              padding: '6px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--danger)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-          >
-            <LogOut size={16} />
-          </button>
-        )}
       </div>
     </motion.aside>
   );
