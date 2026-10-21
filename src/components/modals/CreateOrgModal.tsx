@@ -71,7 +71,7 @@ export const CreateOrgModal: React.FC<CreateOrgModalProps> = ({ isOpen, onClose 
   // Step 2: Admin credentials
   const [adminName, setAdminName] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
-  const [password, setPassword] = useState('Pass@' + Math.floor(1000 + Math.random() * 9000) + '!');
+  const [password, setPassword] = useState('Pass@2026!');
   const [forceReset, setForceReset] = useState<boolean>(true);
 
   // Step 3: Modules
