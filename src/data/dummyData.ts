@@ -16,6 +16,25 @@ export interface Organization {
   tempPassword?: string;
 }
 
+export interface Agency {
+  id: string;
+  organizationId: string;
+  name: string;
+  code: string;
+  city: string;
+  state: string;
+  status: 'Active' | 'Inactive';
+  managerName: string;
+  agentsCount: number;
+  channels: {
+    whatsapp?: string;
+    instagram?: string;
+    facebook?: string;
+  };
+  leadsCount: number;
+  messagesCount: number;
+}
+
 export interface PlatformUser {
   id: string;
   name: string;
@@ -677,4 +696,192 @@ export const RECENT_ACTIVITIES = [
   { action: 'Org Suspended', organization: 'TechStar Agency', performedBy: 'Super Admin', time: '1 hr ago', type: 'suspend' },
   { action: 'Password Reset Issued', organization: 'AutoDeals India', performedBy: 'Super Admin', time: '3 hr ago', type: 'security' },
   { action: 'New Module: Broadcast', organization: 'Sharma Motors', performedBy: 'Super Admin', time: 'Yesterday', type: 'module' }
+];
+
+export const INITIAL_AGENCIES: Agency[] = [
+  {
+    id: 'agency-1',
+    organizationId: 'org-1',
+    name: 'Prime Auto - Delhi Central',
+    code: 'PA-DEL-01',
+    city: 'New Delhi',
+    state: 'Delhi',
+    status: 'Active',
+    managerName: 'Amit Singh',
+    agentsCount: 5,
+    channels: {
+      whatsapp: '+91 98765 43210',
+      instagram: '@primeauto_delhi',
+      facebook: 'Prime Automobiles Delhi Hub'
+    },
+    leadsCount: 680,
+    messagesCount: 2150
+  },
+  {
+    id: 'agency-2',
+    organizationId: 'org-1',
+    name: 'Prime Auto - Noida Expressway',
+    code: 'PA-NOI-02',
+    city: 'Noida',
+    state: 'Uttar Pradesh',
+    status: 'Active',
+    managerName: 'Kunal Kapoor',
+    agentsCount: 4,
+    channels: {
+      whatsapp: '+91 98765 88990',
+      instagram: '@primeauto_noida'
+    },
+    leadsCount: 390,
+    messagesCount: 1120
+  },
+  {
+    id: 'agency-3',
+    organizationId: 'org-1',
+    name: 'Prime Auto - Gurgaon CyberCity',
+    code: 'PA-GGN-03',
+    city: 'Gurgaon',
+    state: 'Haryana',
+    status: 'Active',
+    managerName: 'Sanjay Mehra',
+    agentsCount: 3,
+    channels: {
+      whatsapp: '+91 98765 11223'
+    },
+    leadsCount: 170,
+    messagesCount: 620
+  },
+  {
+    id: 'agency-4',
+    organizationId: 'org-2',
+    name: 'GoldCash - Connaught Place',
+    code: 'GC-CP-01',
+    city: 'New Delhi',
+    state: 'Delhi',
+    status: 'Active',
+    managerName: 'Arjun Reddy',
+    agentsCount: 5,
+    channels: {
+      whatsapp: '+91 99887 76655',
+      instagram: '@goldcash_india'
+    },
+    leadsCount: 520,
+    messagesCount: 1450
+  },
+  {
+    id: 'agency-5',
+    organizationId: 'org-2',
+    name: 'GoldCash - Bandra Kurla Complex',
+    code: 'GC-BKC-02',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    status: 'Active',
+    managerName: 'Rohan Deshmukh',
+    agentsCount: 3,
+    channels: {
+      whatsapp: '+91 99887 44332',
+      instagram: '@goldcash_mumbai'
+    },
+    leadsCount: 356,
+    messagesCount: 650
+  },
+  {
+    id: 'agency-6',
+    organizationId: 'org-4',
+    name: 'Sharma Motors - Mumbai Flagship',
+    code: 'SM-MUM-01',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    status: 'Active',
+    managerName: 'Ravi Patel',
+    agentsCount: 8,
+    channels: {
+      whatsapp: '+91 91234 56789',
+      instagram: '@sharmamotors',
+      facebook: 'Sharma Motors Page'
+    },
+    leadsCount: 2450,
+    messagesCount: 6800
+  },
+  {
+    id: 'agency-7',
+    organizationId: 'org-4',
+    name: 'Sharma Motors - Pune West',
+    code: 'SM-PUN-02',
+    city: 'Pune',
+    state: 'Maharashtra',
+    status: 'Active',
+    managerName: 'Vijay Kadam',
+    agentsCount: 6,
+    channels: {
+      whatsapp: '+91 91234 33445',
+      instagram: '@sharmamotors_pune'
+    },
+    leadsCount: 1280,
+    messagesCount: 3400
+  },
+  {
+    id: 'agency-8',
+    organizationId: 'org-4',
+    name: 'Sharma Motors - Ahmedabad Hub',
+    code: 'SM-AHM-03',
+    city: 'Ahmedabad',
+    state: 'Gujarat',
+    status: 'Active',
+    managerName: 'Jatin Shah',
+    agentsCount: 6,
+    channels: {
+      whatsapp: '+91 91234 88776'
+    },
+    leadsCount: 850,
+    messagesCount: 2100
+  },
+  {
+    id: 'agency-9',
+    organizationId: 'org-3',
+    name: 'TechStar Agency - Koramangala',
+    code: 'TS-BLR-01',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    status: 'Inactive',
+    managerName: 'Sunita Devi',
+    agentsCount: 5,
+    channels: {
+      whatsapp: '+91 88776 65544',
+      facebook: 'TechStar Digital'
+    },
+    leadsCount: 320,
+    messagesCount: 450
+  },
+  {
+    id: 'agency-10',
+    organizationId: 'org-5',
+    name: 'AutoDeals - Indore Outlet',
+    code: 'AD-IND-01',
+    city: 'Indore',
+    state: 'Madhya Pradesh',
+    status: 'Inactive',
+    managerName: 'Meena Joshi',
+    agentsCount: 3,
+    channels: {
+      whatsapp: '+91 77665 54433'
+    },
+    leadsCount: 90,
+    messagesCount: 120
+  },
+  {
+    id: 'agency-11',
+    organizationId: 'org-6',
+    name: 'FreshMart - Malleshwaram Depot',
+    code: 'FM-BLR-01',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    status: 'Active',
+    managerName: 'Deepak Gupta',
+    agentsCount: 7,
+    channels: {
+      whatsapp: '+91 94567 12345'
+    },
+    leadsCount: 430,
+    messagesCount: 980
+  }
 ];

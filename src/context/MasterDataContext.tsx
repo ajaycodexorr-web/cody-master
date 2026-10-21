@@ -7,16 +7,19 @@ import {
   TokenHealthItem,
   WebhookEvent,
   AuditLog,
+  Agency,
   INITIAL_ORGANIZATIONS,
   INITIAL_USERS,
   INITIAL_TOKEN_HEALTH,
   INITIAL_WEBHOOK_EVENTS,
-  INITIAL_AUDIT_LOGS
+  INITIAL_AUDIT_LOGS,
+  INITIAL_AGENCIES
 } from '@/data/dummyData';
 import { useToast } from './ToastContext';
 
 interface MasterDataContextType {
   organizations: Organization[];
+  agencies: Agency[];
   users: PlatformUser[];
   tokenHealth: TokenHealthItem[];
   webhookEvents: WebhookEvent[];
@@ -29,12 +32,15 @@ interface MasterDataContextType {
   notifyTokenAdmin: (channelId: string) => void;
   refreshWebhooks: () => void;
   addAuditLog: (action: AuditLog['action'], targetOrg: string, details: string, payload: Record<string, unknown>) => void;
+  addAgency: (newAgency: Omit<Agency, 'id' | 'leadsCount' | 'messagesCount'>) => Agency;
+  toggleAgencyStatus: (id: string) => void;
 }
 
 const MasterDataContext = createContext<MasterDataContextType | undefined>(undefined);
 
 export const MasterDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [organizations, setOrganizations] = useState<Organization[]>(INITIAL_ORGANIZATIONS);
+  const [agencies, setAgencies] = useState<Agency[]>(INITIAL_AGENCIES);
   const [users, setUsers] = useState<PlatformUser[]>(INITIAL_USERS);
   const [tokenHealth, setTokenHealth] = useState<TokenHealthItem[]>(INITIAL_TOKEN_HEALTH);
   const [webhookEvents, setWebhookEvents] = useState<WebhookEvent[]>(INITIAL_WEBHOOK_EVENTS);
@@ -208,10 +214,48 @@ export const MasterDataProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     showToast('Webhook events refreshed with real-time stream', 'info', 'Refreshed');
   };
 
+  const addAgency = (data: Omit<Agency, 'id' | 'leadsCount' | 'messagesCount'>): Agency => {
+    const newId = `agency-${Date.now()}`;
+    const newAgency: Agency = {
+      ...data,
+      id: newId,
+      leadsCount: 0,
+      messagesCount: 0
+    };
+    setAgencies((prev) => [newAgency, ...prev]);
+
+    const targetOrg = organizations.find((o) => o.id === data.organizationId);
+    if (targetOrg) {
+      addAuditLog(
+        'EDIT_ORGANIZATION',
+        targetOrg.name,
+        `Agency created: ${data.name} (${data.code})`,
+        { agencyId: newId, agencyName: data.name, code: data.code }
+      );
+    }
+
+    showToast(`Agency "${data.name}" added successfully`, 'success');
+    return newAgency;
+  };
+
+  const toggleAgencyStatus = (id: string) => {
+    setAgencies((prev) =>
+      prev.map((a) => {
+        if (a.id === id) {
+          const next = a.status === 'Active' ? 'Inactive' : 'Active';
+          showToast(`Agency ${a.name} marked as ${next}`, 'info');
+          return { ...a, status: next };
+        }
+        return a;
+      })
+    );
+  };
+
   return (
     <MasterDataContext.Provider
       value={{
         organizations,
+        agencies,
         users,
         tokenHealth,
         webhookEvents,
@@ -223,7 +267,9 @@ export const MasterDataProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         resetUserPassword,
         notifyTokenAdmin,
         refreshWebhooks,
-        addAuditLog
+        addAuditLog,
+        addAgency,
+        toggleAgencyStatus
       }}
     >
       {children}

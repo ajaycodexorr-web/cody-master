@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Building2,
@@ -16,7 +18,14 @@ import {
   Mail,
   Phone,
   Edit2,
-  Power
+  Power,
+  LayoutList,
+  LayoutGrid,
+  ChevronRight,
+  ExternalLink,
+  GitBranch,
+  ShieldCheck,
+  Sparkles
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/ui/Badge';
@@ -28,7 +37,11 @@ import { ManageModulesDrawer } from '@/components/modals/ManageModulesDrawer';
 import { CredentialsModal } from '@/components/modals/CredentialsModal';
 
 export default function OrganizationsPage() {
-  const { organizations, updateOrgStatus } = useMasterData();
+  const router = useRouter();
+  const { organizations, agencies, updateOrgStatus } = useMasterData();
+
+  // View mode: 'table' (listing) or 'grid' (cards)
+  const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
 
   // Search & Filter state
   const [searchQuery, setSearchQuery] = useState('');
@@ -59,9 +72,14 @@ export default function OrganizationsPage() {
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
-  const handleToggleStatus = (org: Organization) => {
+  const handleToggleStatus = (org: Organization, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     const nextStatus = org.status === 'Active' ? 'Suspended' : 'Active';
     updateOrgStatus(org.id, nextStatus);
+  };
+
+  const handleRowClick = (orgId: string) => {
+    router.push(`/master/organizations/${orgId}`);
   };
 
   return (
@@ -73,7 +91,7 @@ export default function OrganizationsPage() {
             Organizations
           </h1>
           <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '4px' }}>
-            Manage all registered multi-tenant instances and feature licensing
+            Manage all registered multi-tenant instances, branch agencies, and feature licensing
           </p>
         </div>
 
@@ -124,6 +142,61 @@ export default function OrganizationsPage() {
             <option value="Other">Other</option>
           </select>
 
+          {/* View Mode Toggle (Table Listing vs Cards Grid) */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              backgroundColor: 'var(--bg-surface)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-pill)',
+              padding: '3px'
+            }}
+          >
+            <button
+              onClick={() => setViewMode('table')}
+              title="Table Listing View"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px 12px',
+                borderRadius: 'var(--radius-pill)',
+                border: 'none',
+                backgroundColor: viewMode === 'table' ? 'var(--primary)' : 'transparent',
+                color: viewMode === 'table' ? '#071f15' : 'var(--text-secondary)',
+                fontWeight: 600,
+                fontSize: '12px',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <LayoutList size={14} />
+              <span>Listing</span>
+            </button>
+            <button
+              onClick={() => setViewMode('grid')}
+              title="Cards Grid View"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px 12px',
+                borderRadius: 'var(--radius-pill)',
+                border: 'none',
+                backgroundColor: viewMode === 'grid' ? 'var(--primary)' : 'transparent',
+                color: viewMode === 'grid' ? '#071f15' : 'var(--text-secondary)',
+                fontWeight: 600,
+                fontSize: '12px',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <LayoutGrid size={14} />
+              <span>Cards</span>
+            </button>
+          </div>
+
           {/* Primary CTA */}
           <Button
             variant="primary"
@@ -157,7 +230,8 @@ export default function OrganizationsPage() {
               alignItems: 'center',
               gap: '8px',
               fontSize: '13px',
-              color: selectedStatusFilter === 'All' ? 'var(--primary)' : 'var(--text-secondary)'
+              color: selectedStatusFilter === 'All' ? 'var(--primary-text)' : 'var(--text-secondary)',
+              fontWeight: selectedStatusFilter === 'All' ? 700 : 500
             }}
           >
             <span>Total:</span>
@@ -174,7 +248,8 @@ export default function OrganizationsPage() {
               alignItems: 'center',
               gap: '8px',
               fontSize: '13px',
-              color: selectedStatusFilter === 'Active' ? 'var(--success)' : 'var(--text-secondary)'
+              color: selectedStatusFilter === 'Active' ? 'var(--success)' : 'var(--text-secondary)',
+              fontWeight: selectedStatusFilter === 'Active' ? 700 : 500
             }}
           >
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--success)' }} />
@@ -192,10 +267,11 @@ export default function OrganizationsPage() {
               alignItems: 'center',
               gap: '8px',
               fontSize: '13px',
-              color: selectedStatusFilter === 'Inactive' ? '#9ca3af' : 'var(--text-secondary)'
+              color: selectedStatusFilter === 'Inactive' ? '#64748b' : 'var(--text-secondary)',
+              fontWeight: selectedStatusFilter === 'Inactive' ? 700 : 500
             }}
           >
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#9ca3af' }} />
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#64748b' }} />
             <span>Inactive:</span>
             <strong style={{ fontSize: '15px', color: 'var(--text-primary)' }}>{inactiveCount}</strong>
           </div>
@@ -210,7 +286,8 @@ export default function OrganizationsPage() {
               alignItems: 'center',
               gap: '8px',
               fontSize: '13px',
-              color: selectedStatusFilter === 'Suspended' ? 'var(--danger)' : 'var(--text-secondary)'
+              color: selectedStatusFilter === 'Suspended' ? 'var(--danger)' : 'var(--text-secondary)',
+              fontWeight: selectedStatusFilter === 'Suspended' ? 700 : 500
             }}
           >
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--danger)' }} />
@@ -225,9 +302,10 @@ export default function OrganizationsPage() {
             style={{
               background: 'none',
               border: 'none',
-              color: 'var(--primary)',
+              color: 'var(--primary-text)',
               fontSize: '12px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              fontWeight: 600
             }}
           >
             Reset Filter
@@ -235,7 +313,7 @@ export default function OrganizationsPage() {
         )}
       </div>
 
-      {/* Organization Cards Grid — 2 Columns */}
+      {/* Main Content Area */}
       {filteredOrgs.length === 0 ? (
         <div
           className="card"
@@ -258,8 +336,234 @@ export default function OrganizationsPage() {
             Create Organization
           </Button>
         </div>
+      ) : viewMode === 'table' ? (
+        /* TABLE LISTING VIEW (DEFAULT) */
+        <div className="card" style={{ overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
+              <thead
+                style={{
+                  backgroundColor: 'var(--bg-elevated)',
+                  borderBottom: '1px solid var(--border-strong)',
+                  color: 'var(--text-muted)',
+                  fontSize: '12px'
+                }}
+              >
+                <tr>
+                  <th style={{ padding: '14px 20px', fontWeight: 600 }}>Organization</th>
+                  <th style={{ padding: '14px 20px', fontWeight: 600 }}>Official Contact</th>
+                  <th style={{ padding: '14px 20px', fontWeight: 600 }}>Status</th>
+                  <th style={{ padding: '14px 20px', fontWeight: 600 }}>Active Modules</th>
+                  <th style={{ padding: '14px 20px', fontWeight: 600 }}>Licensed Users</th>
+                  <th style={{ padding: '14px 20px', fontWeight: 600 }}>CRM Activity</th>
+                  <th style={{ padding: '14px 20px', fontWeight: 600, textAlign: 'right' }}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredOrgs.map((org, idx) => {
+                  const orgAgencyCount = agencies.filter((a) => a.organizationId === org.id).length;
+
+                  return (
+                    <motion.tr
+                      key={org.id}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.03 }}
+                      onClick={() => handleRowClick(org.id)}
+                      style={{
+                        borderBottom: '1px solid var(--border)',
+                        cursor: 'pointer',
+                        transition: 'background-color 0.15s ease'
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--bg-hover)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                    >
+                      {/* Organization Name + Avatar + Category */}
+                      <td style={{ padding: '14px 20px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                          <div
+                            style={{
+                              width: '40px',
+                              height: '40px',
+                              borderRadius: 'var(--radius-md)',
+                              backgroundColor: `${org.avatarColor}18`,
+                              border: `1px solid ${org.avatarColor}40`,
+                              color: org.avatarColor,
+                              fontSize: '15px',
+                              fontWeight: 800,
+                              fontFamily: 'var(--font-heading)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              flexShrink: 0
+                            }}
+                          >
+                            {org.name.substring(0, 2).toUpperCase()}
+                          </div>
+                          <div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <span
+                                style={{
+                                  fontWeight: 700,
+                                  color: 'var(--text-primary)',
+                                  fontSize: '14px'
+                                }}
+                              >
+                                {org.name}
+                              </span>
+                              <ChevronRight size={14} color="var(--primary-text)" />
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2px' }}>
+                              <span
+                                style={{
+                                  fontSize: '11px',
+                                  color: 'var(--text-muted)',
+                                  padding: '1px 6px',
+                                  borderRadius: '4px',
+                                  backgroundColor: 'var(--bg-elevated)'
+                                }}
+                              >
+                                {org.category}
+                              </span>
+                              <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                                {orgAgencyCount} {orgAgencyCount === 1 ? 'branch' : 'branches'}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* Contact Info */}
+                      <td style={{ padding: '14px 20px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', fontSize: '12px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-primary)' }}>
+                            <Mail size={12} color="var(--primary-text)" />
+                            <span>{org.adminEmail}</span>
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-secondary)' }}>
+                            <Phone size={12} color="var(--primary-text)" />
+                            <span>{org.phone}</span>
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* Status + Toggle */}
+                      <td style={{ padding: '14px 20px' }} onClick={(e) => e.stopPropagation()}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <StatusBadge status={org.status} />
+                          <Toggle
+                            size="sm"
+                            checked={org.status === 'Active'}
+                            onChange={(e) => handleToggleStatus(org)}
+                            disabled={org.status === 'Inactive'}
+                          />
+                        </div>
+                      </td>
+
+                      {/* Active Modules */}
+                      <td style={{ padding: '14px 20px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', maxWidth: '240px' }}>
+                          <span
+                            style={{
+                              fontSize: '11px',
+                              padding: '2px 8px',
+                              borderRadius: 'var(--radius-pill)',
+                              backgroundColor: 'var(--primary-soft)',
+                              color: 'var(--primary-text)',
+                              fontWeight: 700
+                            }}
+                          >
+                            {org.modules.length} active
+                          </span>
+                          {org.modules.slice(0, 2).map((m) => (
+                            <span
+                              key={m}
+                              style={{
+                                fontSize: '11px',
+                                padding: '2px 6px',
+                                borderRadius: '4px',
+                                backgroundColor: 'var(--bg-elevated)',
+                                border: '1px solid var(--border)',
+                                color: 'var(--text-secondary)'
+                              }}
+                            >
+                              {m.replace(' Cloud API', '').replace(' Direct', '').replace(' Messenger', '')}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+
+                      {/* Licensed Users */}
+                      <td style={{ padding: '14px 20px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                          <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>
+                            {org.activeUsers} <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>/ {org.maxUsers} seats</span>
+                          </div>
+                          <div style={{ width: '80px', height: '4px', backgroundColor: 'var(--border)', borderRadius: '2px', overflow: 'hidden' }}>
+                            <div
+                              style={{
+                                width: `${Math.min(100, (org.activeUsers / org.maxUsers) * 100)}%`,
+                                height: '100%',
+                                backgroundColor: 'var(--primary)'
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* Activity (Leads & Messages) */}
+                      <td style={{ padding: '14px 20px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', fontSize: '12px' }}>
+                          <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
+                            {org.leadsCount.toLocaleString()} leads
+                          </span>
+                          <span style={{ color: 'var(--text-muted)', fontSize: '11px' }}>
+                            {org.messagesThisMonth.toLocaleString()} msgs / mo
+                          </span>
+                        </div>
+                      </td>
+
+                      {/* Actions */}
+                      <td style={{ padding: '14px 20px', textAlign: 'right' }} onClick={(e) => e.stopPropagation()}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                          <Button
+                            variant="primary"
+                            size="sm"
+                            onClick={() => handleRowClick(org.id)}
+                            icon={<ExternalLink size={12} />}
+                          >
+                            View Page
+                          </Button>
+
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setModuleDrawerOrg(org)}
+                            icon={<Layers size={12} />}
+                          >
+                            Modules
+                          </Button>
+
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setCredentialsOrg(org)}
+                            icon={<Key size={12} />}
+                          >
+                            Credentials
+                          </Button>
+                        </div>
+                      </td>
+                    </motion.tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+        /* CARDS GRID VIEW */
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(460px, 1fr))', gap: '24px' }}>
           {filteredOrgs.map((org, idx) => (
             <motion.div
               key={org.id}
@@ -279,7 +583,10 @@ export default function OrganizationsPage() {
             >
               {/* Card Top: Initials avatar + Org Name + Status Badge */}
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer' }}
+                  onClick={() => handleRowClick(org.id)}
+                >
                   <div
                     style={{
                       width: '48px',
@@ -432,7 +739,7 @@ export default function OrganizationsPage() {
                     onClick={() => setModuleDrawerOrg(org)}
                     icon={<Layers size={13} />}
                   >
-                    Manage Modules
+                    Modules
                   </Button>
                   <Button
                     variant="outline"
@@ -440,17 +747,17 @@ export default function OrganizationsPage() {
                     onClick={() => setCredentialsOrg(org)}
                     icon={<Key size={13} />}
                   >
-                    View Credentials
+                    Credentials
                   </Button>
                 </div>
 
                 <Button
-                  variant="ghost"
+                  variant="primary"
                   size="sm"
-                  onClick={() => setModuleDrawerOrg(org)}
-                  icon={<Edit2 size={13} />}
+                  onClick={() => handleRowClick(org.id)}
+                  icon={<ExternalLink size={13} />}
                 >
-                  Edit
+                  View Details
                 </Button>
               </div>
             </motion.div>
